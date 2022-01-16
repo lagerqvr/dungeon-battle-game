@@ -21,13 +21,6 @@ public class Main {
         System.out.println("\nA werewolf emerges from the darkness.");
         System.out.println("Werewolf HP: " + monster.getHealth());
 
-
-        /* if (choice == 1) {
-            System.out.println("You attack the Werewolf for 20 HP. Werewolf has " + monster.getHealth() +  "HP left.");
-        } else if (choice == 2) {
-
-        } */
-
         while(monster.getHealth() > 0) {
             System.out.println("What do you want to do?");
             System.out.println("1: Attack");
