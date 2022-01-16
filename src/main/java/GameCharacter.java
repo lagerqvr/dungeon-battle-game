@@ -10,6 +10,9 @@ public class GameCharacter {
 
     public int takeDamage (int damage) {
         this.health -= damage;
+        if (health < 0) {
+            health = 0;
+        }
         return health;
     }
 
