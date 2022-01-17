@@ -21,7 +21,7 @@ public class Main {
         System.out.println("\nA werewolf emerges from the darkness.");
         System.out.println("Werewolf HP: " + monster.getHealth() + "\n");
 
-        while(player.getHealth() > 0) {
+        while(player.getHealth() > 0 && monster.getHealth() > 0) {
             System.out.println("What do you want to do?");
             System.out.println("1: Attack");
             System.out.println("2: Run");
@@ -33,8 +33,7 @@ public class Main {
                     System.out.println("You attack the Werewolf for 20 HP. Werewolf has " + (monster.takeDamage(20)) +  " HP left.");
 
                     if (monster.getHealth() > 0) {
-                        System.out.println("The Werewolf attacks you for 10 HP. You have " + (player.takeDamage(17)) +  " HP left.");
-
+                        System.out.println("The Werewolf attacks you for 17 HP. You have " + (player.takeDamage(17)) +  " HP left.");
                     }
                 }
                 if (monster.getHealth() == 0) {
