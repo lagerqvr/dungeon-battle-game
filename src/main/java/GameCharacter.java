@@ -1,7 +1,7 @@
-public class GameCharacter {
+abstract class GameCharacter {
 
     private String playerName;
-    private int health;
+    int health;
 
     public GameCharacter(String playerName, int health) {
         this.playerName = playerName;
@@ -16,11 +16,24 @@ public class GameCharacter {
         return health;
     }
 
+    public int setHealth(int health) {
+        this.health = health;
+        return health;
+    }
+
+    public int addHealth (int amount) {
+        this.health += amount;
+        return health;
+    }
+
     public String getName() {
         return (playerName);
     }
 
     public int getHealth() {
+        if (health < 0) {
+            health = 0;
+        }
         return (health);
     }
 }
