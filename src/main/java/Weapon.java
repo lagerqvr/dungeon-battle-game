@@ -1,16 +1,25 @@
+import java.util.Random;
+
 public class Weapon {
 
     private String name;
     private int damage;
 
+    Random random = new Random();
+
     public Weapon(String name, int damage) {
         this.name = name;
-        this.damage = damage;
+        this.damage = random.nextInt(damage)+5;
     }
 
     // Getter
     public String getName() {
         return name;
+    }
+
+    // Getter
+    public int getDamage() {
+        return damage;
     }
 
     // Setter

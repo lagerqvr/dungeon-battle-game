@@ -1,11 +1,15 @@
+import java.util.Random;
+
 abstract class GameCharacter {
 
     private String playerName;
     int health;
 
+    Random random = new Random();
+
     public GameCharacter(String playerName, int health) {
         this.playerName = playerName;
-        this.health = health;
+        this.health = random.nextInt(health)+10;
     }
 
     public int takeDamage (int damage) {

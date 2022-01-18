@@ -15,7 +15,11 @@ public class Main {
         GameCharacter player = new Player(name, 100);
         GameCharacter npc = new Npc("Werewolf", 70);
 
-        Weapon weapon = new Weapon("knife", 20);
+        GameCharacter attacker = new Player(player.getName(), 100);
+        GameCharacter defender = new Npc(npc.getName(), 70);
+
+        Weapon playerWeapon = new Weapon("knife", 17);
+        Weapon npcWeapon = new Weapon("knife", 15);
 
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
@@ -35,10 +39,10 @@ public class Main {
             if(choice == 1) {
                 if (npc.getHealth() > 0) {
                     finished = false;
-                    System.out.println("You attack the Werewolf for 20 HP. Werewolf has " + (npc.takeDamage(20)) +  " HP left.");
+                    System.out.println("You attack the Werewolf with a " + playerWeapon.getName() + " for " + playerWeapon.getDamage() + " HP. Werewolf has " + (npc.takeDamage(playerWeapon.getDamage())) +  " HP left.");
 
                     if (npc.getHealth() > 0) {
-                        System.out.println("The Werewolf attacks you for 17 HP. You have " + (player.takeDamage(17)) +  " HP left.");
+                        System.out.println("The Werewolf attacks you for " + npcWeapon.getDamage() + " HP. You have " + (player.takeDamage(npcWeapon.getDamage())) +  " HP left.");
                     } if (player.getHealth() == 0) {
                         System.out.println("\nGAME OVER! Better luck next time " + player.getName() + "!");
                         System.out.println("------------------------------------------------------------------------------------\n");
