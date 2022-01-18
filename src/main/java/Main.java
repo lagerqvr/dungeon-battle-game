@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Scanner scan = new Scanner(System.in);
 
@@ -13,7 +13,7 @@ public class Main {
         String name = scan.nextLine();
 
         GameCharacter player = new Player(name, 100);
-        GameCharacter npc = new Npc("Werewolf", 70);
+        GameCharacter npc = new Npc("", 70);
 
         GameCharacter attacker = new Player(player.getName(), 100);
         GameCharacter defender = new Npc(npc.getName(), 70);
@@ -24,8 +24,8 @@ public class Main {
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
 
-        System.out.println("\nA Werewolf emerges from the darkness.");
-        System.out.println("Werewolf HP: " + npc.getHealth() + "\n");
+        System.out.println("\nA " + npc.getRandom() + " emerges from the darkness.");
+        System.out.println(npc.getRandom() + " HP: " + npc.getHealth() + "\n");
 
         boolean finished = false;
 
@@ -36,13 +36,15 @@ public class Main {
             System.out.println("3: Quit");
             int choice = scan.nextInt();
 
+            System.out.println("\n");
+
             if(choice == 1) {
                 if (npc.getHealth() > 0) {
                     finished = false;
-                    System.out.println("You attack the Werewolf with a " + playerWeapon.getName() + " for " + playerWeapon.getDamage() + " HP. Werewolf has " + (npc.takeDamage(playerWeapon.getDamage())) +  " HP left.");
+                    System.out.println("You attack the " + npc.getRandom() + " with a " + playerWeapon.getName() + " for " + playerWeapon.getDamage()  +  " HP. The Werewolf has "+ (npc.takeDamage(playerWeapon.getDamage())) +  " HP left.");
 
                     if (npc.getHealth() > 0) {
-                        System.out.println("The Werewolf attacks you for " + npcWeapon.getDamage() + " HP. You have " + (player.takeDamage(npcWeapon.getDamage())) +  " HP left.");
+                        System.out.println("The " + npc.getRandom() + " attacks you for " + npcWeapon.getDamage() + " HP. You have " + (player.takeDamage(npcWeapon.getDamage())) +  " HP left.");
                     } if (player.getHealth() == 0) {
                         System.out.println("\nGAME OVER! Better luck next time " + player.getName() + "!");
                         System.out.println("------------------------------------------------------------------------------------\n");
@@ -63,14 +65,14 @@ public class Main {
                     if (replay == 1) {
                         npc.setHealth(70);
                         finished = true;
-                        System.out.println("\nA new Werewolf emerges from the darkness.");
+                        System.out.println("\nA " + npc.getRandom() + " now emerges from the darkness.");
                     }
 
                     if (replay == 2) {
                         npc.setHealth(70);
                         player.addHealth(20);
                         finished = true;
-                        System.out.println("\nA new Werewolf emerges from the darkness.");
+                        System.out.println("\nA " + npc.getRandom() + " emerges from the darkness.");
                     }
 
                     else if (replay == 3) {

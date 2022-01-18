@@ -5,11 +5,13 @@ abstract class GameCharacter {
     private String playerName;
     int health;
 
+    String[] creatures = {"Werewolf", "Ghoul", "Dragon", "Witch"};
+
     Random random = new Random();
 
     public GameCharacter(String playerName, int health) {
         this.playerName = playerName;
-        this.health = random.nextInt(health)+10;
+        this.health = random.nextInt(health)+3;
     }
 
     public int takeDamage (int damage) {
@@ -39,5 +41,10 @@ abstract class GameCharacter {
             health = 0;
         }
         return (health);
+    }
+
+    public String getRandom() {
+        String randomCreature = creatures[new Random().nextInt(creatures.length)];
+        return randomCreature;
     }
 }
