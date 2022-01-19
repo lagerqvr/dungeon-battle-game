@@ -15,9 +15,9 @@ public class Main {
         GameCharacter player = new Player(name, 100);
         GameCharacter npc = new Npc(70);
 
-        Weapon sword = new Weapon("sword", 17);
-        Weapon axe = new Weapon("axe", 15);
-        Weapon bow = new Weapon("bow", 15);
+        Weapon sword = new Weapon("sword", 18);
+        Weapon axe = new Weapon("axe", 16);
+        Weapon bow = new Weapon("bow", 19);
 
         Weapon attack = new Weapon("attack", 15);
 
@@ -27,6 +27,7 @@ public class Main {
         boolean chosen = false;
 
         while (player.getHealth() > 0 && npc.getHealth() > 0 && !chosen) {
+            System.out.println("\nYou will need a weapon in order to survive.");
             System.out.println("\nWhat is your preferred weapon of choice?");
             System.out.println("1: Sword");
             System.out.println("2: Axe");
