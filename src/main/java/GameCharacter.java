@@ -4,6 +4,8 @@ abstract class GameCharacter {
 
     public String playerName;
     int health;
+    int damage;
+    private String weapon = "knife";
 
     String[] creatures = {"Werewolf", "Ghoul", "Dragon", "Witch"};
 
@@ -11,7 +13,9 @@ abstract class GameCharacter {
 
     public GameCharacter(String playerName, int health) {
         this.playerName = playerName;
-        this.health = random.nextInt(health)+15;
+        this.health = health;
+        this.weapon = weapon;
+        this.damage = damage;
     }
 
     protected GameCharacter() {
@@ -44,6 +48,24 @@ abstract class GameCharacter {
             health = 0;
         }
         return (health);
+    }
+
+    public String setWeapon(String weapon) {
+        this.weapon = weapon;
+        return weapon;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+
+    public int setDamage(int damage) {
+        this.damage = damage;
+        return damage;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public String getRandom() {

@@ -10,6 +10,6 @@ public class Npc extends GameCharacter {
 
     public Npc(int health) {
         this.playerName = randomCreature;
-        this.health = random.nextInt(health)+3;
+        this.health = random.nextInt(health)+12;
     }
 }

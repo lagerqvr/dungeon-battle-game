@@ -15,18 +15,51 @@ public class Main {
         GameCharacter player = new Player(name, 100);
         GameCharacter npc = new Npc(70);
 
-        Weapon playerWeapon = new Weapon("knife", 17);
-        Weapon npcWeapon = new Weapon("knife", 15);
+        Weapon sword = new Weapon("sword", 17);
+        Weapon axe = new Weapon("axe", 15);
+        Weapon bow = new Weapon("bow", 15);
+
+        Weapon attack = new Weapon("attack", 15);
 
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
+
+        boolean chosen = false;
+
+        while (player.getHealth() > 0 && npc.getHealth() > 0 && !chosen) {
+            System.out.println("\nWhat is your preferred weapon of choice?");
+            System.out.println("1: Sword");
+            System.out.println("2: Axe");
+            System.out.println("3: Bow");
+
+            int weapon = scan.nextInt();
+
+            if (weapon == 1) {
+                player.setWeapon(sword.getName());
+                player.setDamage(sword.getDamage());
+                npc.setDamage(attack.getDamage());
+                chosen = true;
+            }
+            if (weapon == 2) {
+                player.setWeapon(axe.getName());
+                player.setDamage(axe.getDamage());
+                npc.setDamage(attack.getDamage());
+                chosen = true;
+            }
+            if (weapon == 3) {
+                player.setWeapon(bow.getName());
+                player.setDamage(bow.getDamage());
+                npc.setDamage(attack.getDamage());
+                chosen = true;
+            }
+        }
 
         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
         System.out.println(npc.getName() + " HP: " + npc.getHealth() + "\n");
 
         boolean finished = false;
 
-        while(player.getHealth() > 0 && npc.getHealth() > 0) {
+        while (player.getHealth() > 0 && npc.getHealth() > 0) {
             System.out.println("What do you want to do?");
             System.out.println("1: Attack");
             System.out.println("2: Run");
@@ -35,14 +68,15 @@ public class Main {
 
             System.out.println("\n");
 
-            if(choice == 1) {
+            if (choice == 1) {
                 if (npc.getHealth() > 0) {
                     finished = false;
-                    System.out.println("You attack the " + npc.getName() + " with a " + playerWeapon.getName() + " for " + playerWeapon.getDamage()  +  " HP. The " + npc.getName() + " has "+ (npc.takeDamage(playerWeapon.getDamage())) +  " HP left.");
+                    System.out.println("You attack the " + npc.getName() + " with a " + player.getWeapon() + " for " + player.getDamage() + " HP. The " + npc.getName() + " has " + (npc.takeDamage(player.damage)) + " HP left.");
 
                     if (npc.getHealth() > 0) {
-                        System.out.println("The " + npc.getName() + " attacks you for " + npcWeapon.getDamage() + " HP. You have " + (player.takeDamage(npcWeapon.getDamage())) +  " HP left.");
-                    } if (player.getHealth() == 0) {
+                        System.out.println("The " + npc.getName() + " attacks you for " + attack.getDamage() + " HP. You have " + (player.takeDamage(npc.damage)) + " HP left.");
+                    }
+                    if (player.getHealth() == 0) {
                         System.out.println("\nGAME OVER! Better luck next time " + player.getName() + "!");
                         System.out.println("------------------------------------------------------------------------------------\n");
                     }
@@ -70,38 +104,30 @@ public class Main {
                         player.addHealth(20);
                         finished = true;
                         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
-                    }
-
-                    else if (replay == 3) {
+                    } else if (replay == 3) {
                         System.out.println("\nHave a nice day!");
                         System.out.println("Quitting program...");
                         System.out.println("------------------------------------------------------------------------------------\n");
                         scan.close();
                         System.exit(0);
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Choose a viable option");
                     }
                 }
 
-            }
-            else if (choice == 2) {
+            } else if (choice == 2) {
 
                 System.out.println("\nYou've escaped succesfully! You might not be so lucky next time around...");
                 System.out.println("------------------------------------------------------------------------------------\n");
                 scan.close();
                 System.exit(0);
-            }
-
-            else if (choice == 3) {
+            } else if (choice == 3) {
                 System.out.println("\nHave a nice day!");
                 System.out.println("Quitting program...");
                 System.out.println("------------------------------------------------------------------------------------\n");
                 scan.close();
                 System.exit(0);
-            }
-            else
+            } else
                 System.out.println("Choose a viable option");
 
         }
