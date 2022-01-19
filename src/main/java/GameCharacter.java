@@ -2,7 +2,7 @@ import java.util.Random;
 
 abstract class GameCharacter {
 
-    private String playerName;
+    public String playerName;
     int health;
 
     String[] creatures = {"Werewolf", "Ghoul", "Dragon", "Witch"};
@@ -11,7 +11,10 @@ abstract class GameCharacter {
 
     public GameCharacter(String playerName, int health) {
         this.playerName = playerName;
-        this.health = random.nextInt(health)+3;
+        this.health = random.nextInt(health)+15;
+    }
+
+    protected GameCharacter() {
     }
 
     public int takeDamage (int damage) {

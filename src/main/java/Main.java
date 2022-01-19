@@ -13,10 +13,7 @@ public class Main {
         String name = scan.nextLine();
 
         GameCharacter player = new Player(name, 100);
-        GameCharacter npc = new Npc("", 70);
-
-        GameCharacter attacker = new Player(player.getName(), 100);
-        GameCharacter defender = new Npc(npc.getName(), 70);
+        GameCharacter npc = new Npc(70);
 
         Weapon playerWeapon = new Weapon("knife", 17);
         Weapon npcWeapon = new Weapon("knife", 15);
@@ -24,8 +21,8 @@ public class Main {
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
 
-        System.out.println("\nA " + npc.getRandom() + " emerges from the darkness.");
-        System.out.println(npc.getRandom() + " HP: " + npc.getHealth() + "\n");
+        System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
+        System.out.println(npc.getName() + " HP: " + npc.getHealth() + "\n");
 
         boolean finished = false;
 
@@ -41,10 +38,10 @@ public class Main {
             if(choice == 1) {
                 if (npc.getHealth() > 0) {
                     finished = false;
-                    System.out.println("You attack the " + npc.getRandom() + " with a " + playerWeapon.getName() + " for " + playerWeapon.getDamage()  +  " HP. The Werewolf has "+ (npc.takeDamage(playerWeapon.getDamage())) +  " HP left.");
+                    System.out.println("You attack the " + npc.getName() + " with a " + playerWeapon.getName() + " for " + playerWeapon.getDamage()  +  " HP. The " + npc.getName() + " has "+ (npc.takeDamage(playerWeapon.getDamage())) +  " HP left.");
 
                     if (npc.getHealth() > 0) {
-                        System.out.println("The " + npc.getRandom() + " attacks you for " + npcWeapon.getDamage() + " HP. You have " + (player.takeDamage(npcWeapon.getDamage())) +  " HP left.");
+                        System.out.println("The " + npc.getName() + " attacks you for " + npcWeapon.getDamage() + " HP. You have " + (player.takeDamage(npcWeapon.getDamage())) +  " HP left.");
                     } if (player.getHealth() == 0) {
                         System.out.println("\nGAME OVER! Better luck next time " + player.getName() + "!");
                         System.out.println("------------------------------------------------------------------------------------\n");
@@ -65,14 +62,14 @@ public class Main {
                     if (replay == 1) {
                         npc.setHealth(70);
                         finished = true;
-                        System.out.println("\nA " + npc.getRandom() + " now emerges from the darkness.");
+                        System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
                     }
 
                     if (replay == 2) {
                         npc.setHealth(70);
                         player.addHealth(20);
                         finished = true;
-                        System.out.println("\nA " + npc.getRandom() + " emerges from the darkness.");
+                        System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
                     }
 
                     else if (replay == 3) {

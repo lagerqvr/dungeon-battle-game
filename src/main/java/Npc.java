@@ -2,7 +2,14 @@ import java.util.Random;
 
 public class Npc extends GameCharacter {
 
-    public Npc(String playerName, int health) {
-        super(playerName, health);
+    String[] creatures = {"Werewolf", "Ghoul", "Basilisk", "Witch", "Sandworm", "Skeleton", "Zombie"};
+
+    Random random = new Random();
+
+    String randomCreature = creatures[new Random().nextInt(creatures.length)];
+
+    public Npc(int health) {
+        this.playerName = randomCreature;
+        this.health = random.nextInt(health)+3;
     }
 }
