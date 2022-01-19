@@ -8,8 +8,9 @@ public class Npc extends GameCharacter {
 
     String randomCreature = creatures[new Random().nextInt(creatures.length)];
 
-    public Npc(int health) {
+    public Npc(int health, double finesse) {
         this.playerName = randomCreature;
-        this.health = random.nextInt(health)+12;
+        this.health = random.nextInt(health)+23;
+        this.finesse = finesse;
     }
 }

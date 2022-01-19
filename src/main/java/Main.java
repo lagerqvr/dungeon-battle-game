@@ -12,14 +12,14 @@ public class Main {
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 100);
-        GameCharacter npc = new Npc(70);
+        GameCharacter player = new Player(name, 115, 0.8);
+        GameCharacter npc = new Npc(70, 0.5);
 
         Weapon sword = new Weapon("sword", 18);
-        Weapon axe = new Weapon("axe", 16);
+        Weapon axe = new Weapon("dagger", 16);
         Weapon bow = new Weapon("bow", 19);
 
-        Weapon attack = new Weapon("attack", 15);
+        Weapon attack = new Weapon("attack", 16);
 
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
@@ -75,7 +75,7 @@ public class Main {
                     System.out.println("You attack the " + npc.getName() + " with a " + player.getWeapon() + " for " + player.getDamage() + " HP. The " + npc.getName() + " has " + (npc.takeDamage(player.damage)) + " HP left.");
 
                     if (npc.getHealth() > 0) {
-                        System.out.println("The " + npc.getName() + " attacks you for " + attack.getDamage() + " HP. You have " + (player.takeDamage(npc.damage)) + " HP left.");
+                        System.out.println("The " + npc.getName() + " attacks you for " + npc.getDamage() + " HP. You have " + (player.takeDamage(npc.damage)) + " HP left.");
                     }
                     if (player.getHealth() == 0) {
                         System.out.println("\nGAME OVER! Better luck next time " + player.getName() + "!");
@@ -85,7 +85,7 @@ public class Main {
 
                 while (player.getHealth() > 0 && npc.getHealth() == 0 && !finished) {
 
-                    System.out.println("\nGood job! You've won the fight! You had " + player.getHealth() + " HP left.");
+                    System.out.println("\nGood job! You've successfully defeated the " + npc.getName() + "! You had " + player.getHealth() + " HP left.");
                     System.out.println("------------------------------------------------------------------------------------\n");
                     System.out.println("What do you want to do now? You have " + player.getHealth() + " HP left.");
                     System.out.println("1: Keep fighting");

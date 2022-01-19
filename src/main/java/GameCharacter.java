@@ -3,11 +3,10 @@ import java.util.Random;
 abstract class GameCharacter {
 
     public String playerName;
-    int health;
-    int damage;
+    double health;
+    double damage;
     private String weapon = "knife";
-
-    String[] creatures = {"Werewolf", "Ghoul", "Dragon", "Witch"};
+    public double finesse;
 
     Random random = new Random();
 
@@ -21,12 +20,12 @@ abstract class GameCharacter {
     protected GameCharacter() {
     }
 
-    public int takeDamage (int damage) {
+    public double takeDamage (double damage) {
         this.health -= damage;
         if (health < 0) {
             health = 0;
         }
-        return health;
+        return Math.round(health * 100.0) / 100.0;
     }
 
     public int setHealth(int health) {
@@ -34,7 +33,7 @@ abstract class GameCharacter {
         return health;
     }
 
-    public int addHealth (int amount) {
+    public double addHealth (int amount) {
         this.health += amount;
         return health;
     }
@@ -43,11 +42,11 @@ abstract class GameCharacter {
         return (playerName);
     }
 
-    public int getHealth() {
+    public double getHealth() {
         if (health < 0) {
             health = 0;
         }
-        return (health);
+        return health;
     }
 
     public String setWeapon(String weapon) {
@@ -59,17 +58,13 @@ abstract class GameCharacter {
         return weapon;
     }
 
-    public int setDamage(int damage) {
-        this.damage = damage;
-        return damage;
+    public double setDamage(double damage) {
+        double temp = damage * finesse;
+        this.damage = temp;
+        return temp;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public String getRandom() {
-        String randomCreature = creatures[new Random().nextInt(creatures.length)];
-        return randomCreature;
+    public double getDamage() {
+        return Math.round(damage * 100.0) / 100.0;
     }
 }
