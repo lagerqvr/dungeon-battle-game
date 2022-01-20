@@ -13,7 +13,7 @@ public class Main {
         String name = scan.nextLine();
 
         GameCharacter player = new Player(name, 115, 0.8);
-        GameCharacter npc = new Npc(70, 0.5);
+        GameCharacter npc = new Npc("", 70, 0.5);
 
         Weapon sword = new Weapon("sword", 18);
         Weapon axe = new Weapon("dagger", 16);
@@ -54,6 +54,8 @@ public class Main {
                 chosen = true;
             }
         }
+
+        npc.setName(npc.createRandomNpc());
 
         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
         System.out.println(npc.getName() + " HP: " + npc.getHealth() + "\n");
@@ -97,6 +99,7 @@ public class Main {
                     if (replay == 1) {
                         npc.setHealth(70);
                         finished = true;
+                        npc.setName(npc.createRandomNpc());
                         System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
                     }
 
@@ -104,7 +107,9 @@ public class Main {
                         npc.setHealth(70);
                         player.addHealth(20);
                         finished = true;
+                        npc.setName(npc.createRandomNpc());
                         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
+
                     } else if (replay == 3) {
                         System.out.println("\nHave a nice day!");
                         System.out.println("Quitting program...");

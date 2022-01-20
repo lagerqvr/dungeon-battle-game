@@ -20,6 +20,13 @@ abstract class GameCharacter {
     protected GameCharacter() {
     }
 
+    public String createRandomNpc() {
+        String[] creatures = {"Werewolf", "Ghoul", "Basilisk", "Witch", "Sandworm", "Skeleton", "Zombie"};
+        Random random = new Random();
+        String randomCreature = creatures[new Random().nextInt(creatures.length)];
+        return randomCreature;
+    }
+
     public double takeDamage (double damage) {
         this.health -= damage;
         if (health < 0) {
@@ -40,6 +47,11 @@ abstract class GameCharacter {
 
     public String getName() {
         return (playerName);
+    }
+
+    public String setName(String name) {
+        this.playerName = name;
+        return name;
     }
 
     public double getHealth() {
