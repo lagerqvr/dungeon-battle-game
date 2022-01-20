@@ -54,6 +54,10 @@ abstract class GameCharacter {
         return name;
     }
 
+    public double getFinesse() {
+        return finesse;
+    }
+
     public double getHealth() {
         if (health < 0) {
             health = 0;

@@ -12,7 +12,7 @@ public class Main {
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 115, 0.8);
+        GameCharacter player = new Player(name, 1150, 0.8);
         GameCharacter npc = new Npc("", 70, 0.5);
 
         Weapon sword = new Weapon("sword", 18);
@@ -23,11 +23,13 @@ public class Main {
 
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
+        System.out.println("Your finesse: " + player.getFinesse());
 
         boolean chosen = false;
 
         while (player.getHealth() > 0 && npc.getHealth() > 0 && !chosen) {
             System.out.println("\nYou will need a weapon in order to survive.");
+            System.out.println("Finesse will determine your success in battle against your opponent.");
             System.out.println("\nWhat is your preferred weapon of choice?");
             System.out.println("1: Sword");
             System.out.println("2: Axe");
@@ -58,9 +60,11 @@ public class Main {
         npc.setName(npc.createRandomNpc());
 
         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
-        System.out.println(npc.getName() + " HP: " + npc.getHealth() + "\n");
+        System.out.println("HP: " + npc.getHealth() + "");
+        System.out.println("Finesse: " + npc.getFinesse() + "\n");
 
         boolean finished = false;
+        boolean healthPotion = false;
 
         while (player.getHealth() > 0 && npc.getHealth() > 0) {
             System.out.println("What do you want to do?");
@@ -86,13 +90,12 @@ public class Main {
                 }
 
                 while (player.getHealth() > 0 && npc.getHealth() == 0 && !finished) {
-
-                    System.out.println("\nGood job! You've successfully defeated the " + npc.getName() + "! You had " + player.getHealth() + " HP left.");
-                    System.out.println("------------------------------------------------------------------------------------\n");
-                    System.out.println("What do you want to do now? You have " + player.getHealth() + " HP left.");
-                    System.out.println("1: Keep fighting");
-                    System.out.println("2: Drink health potion and keep fighting (+ 20 HP)");
-                    System.out.println("3: Quit");
+                        System.out.println("\nGood job! You've successfully defeated the " + npc.getName() + "! You had " + player.getHealth() + " HP left.");
+                        System.out.println("------------------------------------------------------------------------------------\n");
+                        System.out.println("What do you want to do now? You have " + player.getHealth() + " HP left.");
+                        System.out.println("1: Keep fighting");
+                        System.out.println("2: Drink health potion (+ 20 HP) and keep fighting (x 1)");
+                        System.out.println("3: Quit");
 
                     int replay = scan.nextInt();
 
@@ -104,13 +107,20 @@ public class Main {
                     }
 
                     if (replay == 2) {
-                        npc.setHealth(70);
-                        player.addHealth(20);
-                        finished = true;
-                        npc.setName(npc.createRandomNpc());
-                        System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
+                        if (!healthPotion) {
+                            healthPotion = true;
+                            npc.setHealth(70);
+                            player.addHealth(20);
+                            finished = true;
+                            npc.setName(npc.createRandomNpc());
+                            System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
+                        } else {
+                            System.out.println("\nYou've already used your health potion.");
+                            System.out.println("Choose another option.");
+                        }
+                    }
 
-                    } else if (replay == 3) {
+                    else if (replay == 3) {
                         System.out.println("\nHave a nice day!");
                         System.out.println("Quitting program...");
                         System.out.println("------------------------------------------------------------------------------------\n");
@@ -137,6 +147,7 @@ public class Main {
                 System.out.println("Choose a viable option");
 
         }
+
 
 
     }
