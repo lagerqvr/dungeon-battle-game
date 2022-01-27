@@ -48,7 +48,7 @@ abstract class GameCharacter {
     }
 
     public double heal (int amount) {
-        this.health += amount;
+        this.health += random.nextInt(amount)+5;;
         return health;
     }
 

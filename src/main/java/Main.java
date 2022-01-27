@@ -110,7 +110,7 @@ public class Main {
                         System.out.println("------------------------------------------------------------------------------------\n");
                         System.out.println("What do you want to do now? You have " + player.getHealth() + " HP left.");
                         System.out.println("1: Keep fighting");
-                        System.out.println("2: Drink health potion (+ 20 HP) and keep fighting (x 1)");
+                        System.out.println("2: Drink health potion and keep fighting (x 1)");
                         System.out.println("3: Quit");
 
                     int replay = scan.nextInt();
@@ -129,7 +129,10 @@ public class Main {
                             rounds++;
                             healthPotion = true;
                             npc.setHealth(70);
+                            double oldHealth = player.getHealth();
                             player.heal(20);
+                            double newHealth = player.getHealth();
+                            System.out.println("\nThe health potion added " + (newHealth - oldHealth) + " HP to your health!");
                             finished = true;
                             npc = Npc.createRandomNpc();
                             System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
