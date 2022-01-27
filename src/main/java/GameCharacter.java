@@ -3,7 +3,7 @@ import java.util.Random;
 
 abstract class GameCharacter {
 
-    private ArrayList<Weapon> inventory = new ArrayList<>();
+    public ArrayList<Weapon> inventory = new ArrayList<>();
 
     public String playerName;
     double health;
@@ -18,9 +18,20 @@ abstract class GameCharacter {
         this.health = health;
         this.weapon = weapon;
         this.damage = damage;
+
+        addWeapon(new Weapon("stick",3));
+        addWeapon(new Weapon("rock", 2));
     }
 
     protected GameCharacter() {
+    }
+
+    public void addWeapon(Weapon weapon) {
+        inventory.add(weapon);
+    }
+
+    public ArrayList<Weapon> getInventory() {
+        return inventory;
     }
 
     public double takeDamage (double damage) {

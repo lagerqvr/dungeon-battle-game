@@ -12,14 +12,14 @@ public class Main {
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 1150, 0.8);
+        GameCharacter player = new Player(name, 115, 0.8);
         GameCharacter npc = Npc.createRandomNpc();
 
         int rounds = 0;
+        Weapon currentWeapon;
 
-        Weapon sword = new Weapon("sword", 18);
-        Weapon axe = new Weapon("dagger", 16);
-        Weapon bow = new Weapon("bow", 19);
+        player.addWeapon(new Weapon("stick from the ground",2));
+        player.addWeapon(new Weapon("rock found in a bush", 1));
 
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
@@ -29,8 +29,8 @@ public class Main {
 
         while (player.getHealth() > 0 && npc.getHealth() > 0 && !chosen) {
             System.out.println("\nYou will need a weapon in order to survive.");
-            System.out.println("Finesse will determine your success in battle against your opponent.");
-            System.out.println("\nWhat is your preferred weapon of choice?");
+            System.out.println("Finesse will determine the effectiveness of attacks.");
+            System.out.println("\nYou see three weapons laying on the ground in front of you... Which one is your preferred weapon of choice?");
             System.out.println("1: Sword");
             System.out.println("2: Axe");
             System.out.println("3: Bow");
@@ -38,22 +38,28 @@ public class Main {
             int weapon = scan.nextInt();
 
             if (weapon == 1) {
-                player.setWeapon(sword.getName());
-                player.setDamage(sword.getDamage());
+                player.addWeapon(new Weapon("sword", 18));
+                currentWeapon = player.getInventory().get(2);
+                player.setWeapon(currentWeapon.getName());
+                player.setDamage(currentWeapon.getDamage());
                 chosen = true;
-                System.out.println("\nHow many rounds can you survive?");
+                System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
             }
             if (weapon == 2) {
-                player.setWeapon(axe.getName());
-                player.setDamage(axe.getDamage());
+                player.addWeapon(new Weapon("axe", 16));
+                currentWeapon = player.getInventory().get(2);
+                player.setWeapon(currentWeapon.getName());
+                player.setDamage(currentWeapon.getDamage());
                 chosen = true;
-                System.out.println("\nHow many rounds can you survive?");
+                System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
             }
             if (weapon == 3) {
-                player.setWeapon(bow.getName());
-                player.setDamage(bow.getDamage());
+                player.addWeapon(new Weapon("bow", 19));
+                currentWeapon = player.getInventory().get(2);
+                player.setWeapon(currentWeapon.getName());
+                player.setDamage(currentWeapon.getDamage());
                 chosen = true;
-                System.out.println("\nHow many rounds can you survive?");
+                System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
             }
         }
 
@@ -61,7 +67,7 @@ public class Main {
 
         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
         System.out.println("HP: " + npc.getHealth() + "");
-        System.out.println("Finesse: " + npc.getFinesse() + "\n");
+        System.out.println("Finesse: " + npc.getFinesse() + "");
 
         boolean finished = false;
         boolean healthPotion = false;
@@ -75,9 +81,17 @@ public class Main {
             System.out.println("3: Quit");
             int choice = scan.nextInt();
 
-            System.out.println("\n");
-
             if (choice == 1) {
+                System.out.println("\nINVENTORY:");
+                for (int i = 0; i < player.getInventory().size(); i++) {
+                    System.out.printf("%d - %s\n", i, player.getInventory().get(i).getName() + " (" + player.getInventory().get(i).getDamage() + " dmg)");
+                }
+                System.out.println("\nWhich weapon would you like to attack with?");
+                currentWeapon = player.getInventory().get(scan.nextInt());
+
+                player.setWeapon(currentWeapon.getName());
+                player.setDamage(currentWeapon.getDamage());
+
                 if (npc.getHealth() > 0) {
                     finished = false;
                     System.out.println("You attack the " + npc.getName() + " with a " + player.getWeapon() + " for " + player.getDamage() + " HP. The " + npc.getName() + " has " + (npc.takeDamage(player.damage)) + " HP left.");
