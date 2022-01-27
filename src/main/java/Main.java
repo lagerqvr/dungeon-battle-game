@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -9,12 +10,12 @@ public class Main {
         Random random = new Random();
 
         System.out.println("------------------------------------------------------------------------------------\n");
-        System.out.println("Welcome to GenericDungeonGame v3.1! ");
+        System.out.println("Welcome to DeepDungeon v3.1! ");
         System.out.println("What is your name stranger?");
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 115, 0.8);
+        GameCharacter player = new Player(name, 1150, 0.8);
         GameCharacter npc = Npc.createRandomNpc();
 
         int rounds = 0;
@@ -37,31 +38,46 @@ public class Main {
             System.out.println("2: Axe");
             System.out.println("3: Bow");
 
+            try {
+
             int weapon = scan.nextInt();
 
-            if (weapon == 1) {
-                player.addWeapon(new Weapon("sword", 18));
-                currentWeapon = player.getInventory().get(2);
-                player.setWeapon(currentWeapon.getName());
-                player.setDamage(currentWeapon.getDamage());
-                chosen = true;
-                System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
-            }
-            if (weapon == 2) {
-                player.addWeapon(new Weapon("axe", 16));
-                currentWeapon = player.getInventory().get(2);
-                player.setWeapon(currentWeapon.getName());
-                player.setDamage(currentWeapon.getDamage());
-                chosen = true;
-                System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
-            }
-            if (weapon == 3) {
-                player.addWeapon(new Weapon("bow", 19));
-                currentWeapon = player.getInventory().get(2);
-                player.setWeapon(currentWeapon.getName());
-                player.setDamage(currentWeapon.getDamage());
-                chosen = true;
-                System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
+                if (weapon == 1) {
+                    player.addWeapon(new Weapon("sword", 18));
+                    currentWeapon = player.getInventory().get(2);
+                    player.setWeapon(currentWeapon.getName());
+                    player.setDamage(currentWeapon.getDamage());
+                    chosen = true;
+                    System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
+                }
+
+                if (weapon == 2) {
+                    player.addWeapon(new Weapon("axe", 16));
+                    currentWeapon = player.getInventory().get(2);
+                    player.setWeapon(currentWeapon.getName());
+                    player.setDamage(currentWeapon.getDamage());
+                    chosen = true;
+                    System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
+                }
+                if (weapon == 3) {
+                    player.addWeapon(new Weapon("bow", 19));
+                    currentWeapon = player.getInventory().get(2);
+                    player.setWeapon(currentWeapon.getName());
+                    player.setDamage(currentWeapon.getDamage());
+                    chosen = true;
+                    System.out.println("\nSomething moves in the shadows... How many rounds can you survive?");
+                } else {
+                    System.out.println("Please choose a weapon.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Choose a number between 1 and 3!");
+                scan.next();
+                continue;
+            } catch (Exception e) {
+                System.out.println(e);
+                scan.next();
+                continue;
             }
         }
 
@@ -81,33 +97,36 @@ public class Main {
             System.out.println("1: Attack");
             System.out.println("2: Run");
             System.out.println("3: Quit");
-            int choice = scan.nextInt();
 
-            if (choice == 1) {
-                System.out.println("\nINVENTORY:");
-                for (int i = 0; i < player.getInventory().size(); i++) {
-                    System.out.printf("%d - %s\n", i+1, player.getInventory().get(i).getName() + " (" + player.getInventory().get(i).getDamage() + " dmg)");
-                }
-                System.out.println("\nWhich weapon would you like to attack with?");
-                currentWeapon = player.getInventory().get(scan.nextInt()-1);
+            try {
 
-                player.setWeapon(currentWeapon.getName());
-                player.setDamage(currentWeapon.getDamage());
+                int choice = scan.nextInt();
 
-                if (npc.getHealth() > 0) {
-                    finished = false;
-                    System.out.println("You attack the " + npc.getName() + " with a " + player.getWeapon() + " for " + player.getDamage() + " HP. The " + npc.getName() + " has " + (npc.takeDamage(player.damage)) + " HP left.");
+                if (choice == 1) {
+                    System.out.println("\nINVENTORY:");
+                    for (int i = 0; i < player.getInventory().size(); i++) {
+                        System.out.printf("%d - %s\n", i+1, player.getInventory().get(i).getName() + " (" + player.getInventory().get(i).getDamage() + " dmg)");
+                    }
+                    System.out.println("\nWhich weapon would you like to attack with?");
+                    currentWeapon = player.getInventory().get(scan.nextInt()-1);
+
+                    player.setWeapon(currentWeapon.getName());
+                    player.setDamage(currentWeapon.getDamage());
 
                     if (npc.getHealth() > 0) {
-                        System.out.println("The " + npc.getName() + " attacks you for " + npc.getDamage() + " HP. You have " + (player.takeDamage(npc.damage)) + " HP left.");
-                    }
-                    if (player.getHealth() == 0) {
-                        System.out.println("\nGAME OVER! You made it to round " + rounds + ". Better luck next time " + player.getName() + "!");
-                        System.out.println("------------------------------------------------------------------------------------\n");
-                    }
-                }
+                        finished = false;
+                        System.out.println("You attack the " + npc.getName() + " with a " + player.getWeapon() + " for " + player.getDamage() + " HP. The " + npc.getName() + " has " + (npc.takeDamage(player.damage)) + " HP left.");
 
-                while (player.getHealth() > 0 && npc.getHealth() == 0 && !finished) {
+                        if (npc.getHealth() > 0) {
+                            System.out.println("The " + npc.getName() + " attacks you for " + npc.getDamage() + " HP. You have " + (player.takeDamage(npc.damage)) + " HP left.");
+                        }
+                        if (player.getHealth() == 0) {
+                            System.out.println("\nGAME OVER! You made it to round " + rounds + ". Better luck next time " + player.getName() + "!");
+                            System.out.println("------------------------------------------------------------------------------------\n");
+                        }
+                    }
+
+                    while (player.getHealth() > 0 && npc.getHealth() == 0 && !finished) {
                         System.out.println("\nGood job! You've successfully defeated the " + npc.getName() + "! You had " + player.getHealth() + " HP left.");
                         System.out.println("The " + npc.getName() + " dropped a magical weapon which has been added to your inventory.");
                         player.addWeapon(Weapon.createRandomDrop());
@@ -117,60 +136,80 @@ public class Main {
                         System.out.println("2: Drink health potion and keep fighting (x 1)");
                         System.out.println("3: Quit");
 
-                    int replay = scan.nextInt();
+                        try {
+                            int replay = scan.nextInt();
 
-                    if (replay == 1) {
-                        rounds++;
-                        npc.setHealth(70);
-                        finished = true;
-                        npc = Npc.createRandomNpc();
-                        System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
-                        System.out.println("HP: " + npc.getHealth() + "");
-                    }
+                            if (replay == 1) {
+                                rounds++;
+                                npc.setHealth(70);
+                                finished = true;
+                                npc = Npc.createRandomNpc();
+                                System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
+                                System.out.println("HP: " + npc.getHealth() + "");
+                            }
 
-                    if (replay == 2) {
-                        if (!healthPotion) {
-                            rounds++;
-                            healthPotion = true;
-                            npc.setHealth(70);
-                            double oldHealth = player.getHealth();
-                            player.heal(20);
-                            double newHealth = player.getHealth();
-                            System.out.println("\nThe health potion added " + (newHealth - oldHealth) + " HP to your health!");
-                            finished = true;
-                            npc = Npc.createRandomNpc();
-                            System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
-                            System.out.println("HP: " + npc.getHealth() + "");
-                        } else {
-                            System.out.println("\nYOU'VE ALREADY USED YOUR POTION. Choose another option.");
+                            if (replay == 2) {
+                                if (!healthPotion) {
+                                    rounds++;
+                                    healthPotion = true;
+                                    npc.setHealth(70);
+                                    double oldHealth = player.getHealth();
+                                    player.heal(20);
+                                    double newHealth = player.getHealth();
+                                    System.out.println("\nThe health potion added " + (newHealth - oldHealth) + " HP to your health!");
+                                    finished = true;
+                                    npc = Npc.createRandomNpc();
+                                    System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
+                                    System.out.println("HP: " + npc.getHealth() + "");
+                                } else {
+                                    System.out.println("\nYOU'VE ALREADY USED YOUR POTION. Choose another option.");
+                                }
+                            }
+
+                            else if (replay == 3) {
+                                System.out.println("\nHave a nice day!");
+                                System.out.println("Quitting program...");
+                                System.out.println("------------------------------------------------------------------------------------\n");
+                                scan.close();
+                                System.exit(0);
+                            } else {
+                                System.out.println("Choose a viable option");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Choose a number between 1 and 3!");
+                            scan.next();
+                            continue;
+                        } catch (Exception e) {
+                            System.out.println(e);
+                            scan.next();
+                            continue;
                         }
                     }
 
-                    else if (replay == 3) {
-                        System.out.println("\nHave a nice day!");
-                        System.out.println("Quitting program...");
-                        System.out.println("------------------------------------------------------------------------------------\n");
-                        scan.close();
-                        System.exit(0);
-                    } else {
-                        System.out.println("Choose a viable option");
-                    }
-                }
+                } else if (choice == 2) {
 
-            } else if (choice == 2) {
+                    System.out.println("\nYou've escaped succesfully! You might not be so lucky next time around...");
+                    System.out.println("------------------------------------------------------------------------------------\n");
+                    scan.close();
+                    System.exit(0);
+                } else if (choice == 3) {
+                    System.out.println("\nHave a nice day!");
+                    System.out.println("Quitting program...");
+                    System.out.println("------------------------------------------------------------------------------------\n");
+                    scan.close();
+                    System.exit(0);
+                } else
+                    System.out.println("Choose a viable option");
+            } catch (InputMismatchException e) {
+                System.out.println("Choose a number between 1 and 3!");
+                scan.next();
+                continue;
+            } catch (Exception e) {
+                System.out.println(e);
+                scan.next();
+                continue;
+            }
 
-                System.out.println("\nYou've escaped succesfully! You might not be so lucky next time around...");
-                System.out.println("------------------------------------------------------------------------------------\n");
-                scan.close();
-                System.exit(0);
-            } else if (choice == 3) {
-                System.out.println("\nHave a nice day!");
-                System.out.println("Quitting program...");
-                System.out.println("------------------------------------------------------------------------------------\n");
-                scan.close();
-                System.exit(0);
-            } else
-                System.out.println("Choose a viable option");
 
         }
 
