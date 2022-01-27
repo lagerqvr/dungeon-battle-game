@@ -12,14 +12,12 @@ public class Main {
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 1150, 0.8);
-        GameCharacter npc = new Npc("", 70, 0.5);
+        GameCharacter player = new Player(name, 115, 0.8);
+        GameCharacter npc = Npc.createRandomNpc();
 
         Weapon sword = new Weapon("sword", 18);
         Weapon axe = new Weapon("dagger", 16);
         Weapon bow = new Weapon("bow", 19);
-
-        Weapon attack = new Weapon("attack", 16);
 
         System.out.println("\nYour name: " + player.getName());
         System.out.println("Your HP: " + player.getHealth());
@@ -40,24 +38,21 @@ public class Main {
             if (weapon == 1) {
                 player.setWeapon(sword.getName());
                 player.setDamage(sword.getDamage());
-                npc.setDamage(attack.getDamage());
                 chosen = true;
             }
             if (weapon == 2) {
                 player.setWeapon(axe.getName());
                 player.setDamage(axe.getDamage());
-                npc.setDamage(attack.getDamage());
                 chosen = true;
             }
             if (weapon == 3) {
                 player.setWeapon(bow.getName());
                 player.setDamage(bow.getDamage());
-                npc.setDamage(attack.getDamage());
                 chosen = true;
             }
         }
 
-        npc.setName(npc.createRandomNpc());
+        npc = Npc.createRandomNpc();
 
         System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
         System.out.println("HP: " + npc.getHealth() + "");
@@ -102,7 +97,7 @@ public class Main {
                     if (replay == 1) {
                         npc.setHealth(70);
                         finished = true;
-                        npc.setName(npc.createRandomNpc());
+                        npc = Npc.createRandomNpc();
                         System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
                     }
 
@@ -110,9 +105,9 @@ public class Main {
                         if (!healthPotion) {
                             healthPotion = true;
                             npc.setHealth(70);
-                            player.addHealth(20);
+                            player.heal(20);
                             finished = true;
-                            npc.setName(npc.createRandomNpc());
+                            npc = Npc.createRandomNpc();
                             System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
                         } else {
                             System.out.println("\nYou've already used your health potion.");
