@@ -15,7 +15,7 @@ public class Main {
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 115, 0.8);
+        GameCharacter player = new Player(name, 121, 0.8);
         GameCharacter npc = Npc.createRandomNpc();
 
         int rounds = 0;
