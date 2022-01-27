@@ -1,13 +1,11 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Random;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        Random random = new Random();
 
         System.out.println("------------------------------------------------------------------------------------\n");
         System.out.println("Welcome to DeepDungeon v3.1! ");
@@ -73,11 +71,8 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.out.println("Choose a number between 1 and 3!");
                 scan.next();
-                continue;
             } catch (Exception e) {
-                System.out.println(e);
                 scan.next();
-                continue;
             }
         }
 
@@ -178,17 +173,14 @@ public class Main {
                         } catch (InputMismatchException e) {
                             System.out.println("Choose a number between 1 and 3!");
                             scan.next();
-                            continue;
                         } catch (Exception e) {
-                            System.out.println(e);
                             scan.next();
-                            continue;
                         }
                     }
 
                 } else if (choice == 2) {
 
-                    System.out.println("\nYou've escaped succesfully! You might not be so lucky next time around...");
+                    System.out.println("\nYou've escaped successfully! You might not be so lucky next time around...");
                     System.out.println("------------------------------------------------------------------------------------\n");
                     scan.close();
                     System.exit(0);
@@ -203,11 +195,8 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.out.println("Choose a number between 1 and 3!");
                 scan.next();
-                continue;
             } catch (Exception e) {
-                System.out.println(e);
                 scan.next();
-                continue;
             }
 
 
