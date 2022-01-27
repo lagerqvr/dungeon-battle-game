@@ -7,13 +7,15 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("------------------------------------------------------------------------------------\n");
-        System.out.println("Welcome to the dungeon!\n");
+        System.out.println("Welcome to GenericDungeonGame v3.1! ");
         System.out.println("What is your name stranger?");
 
         String name = scan.nextLine();
 
-        GameCharacter player = new Player(name, 115, 0.8);
+        GameCharacter player = new Player(name, 1150, 0.8);
         GameCharacter npc = Npc.createRandomNpc();
+
+        int rounds = 0;
 
         Weapon sword = new Weapon("sword", 18);
         Weapon axe = new Weapon("dagger", 16);
@@ -39,16 +41,19 @@ public class Main {
                 player.setWeapon(sword.getName());
                 player.setDamage(sword.getDamage());
                 chosen = true;
+                System.out.println("\nHow many rounds can you survive?");
             }
             if (weapon == 2) {
                 player.setWeapon(axe.getName());
                 player.setDamage(axe.getDamage());
                 chosen = true;
+                System.out.println("\nHow many rounds can you survive?");
             }
             if (weapon == 3) {
                 player.setWeapon(bow.getName());
                 player.setDamage(bow.getDamage());
                 chosen = true;
+                System.out.println("\nHow many rounds can you survive?");
             }
         }
 
@@ -60,8 +65,10 @@ public class Main {
 
         boolean finished = false;
         boolean healthPotion = false;
+        rounds++;
 
         while (player.getHealth() > 0 && npc.getHealth() > 0) {
+            System.out.println("\nROUND: " + rounds);
             System.out.println("What do you want to do?");
             System.out.println("1: Attack");
             System.out.println("2: Run");
@@ -79,7 +86,7 @@ public class Main {
                         System.out.println("The " + npc.getName() + " attacks you for " + npc.getDamage() + " HP. You have " + (player.takeDamage(npc.damage)) + " HP left.");
                     }
                     if (player.getHealth() == 0) {
-                        System.out.println("\nGAME OVER! Better luck next time " + player.getName() + "!");
+                        System.out.println("\nGAME OVER! You made it to round " + rounds + ". Better luck next time " + player.getName() + "!");
                         System.out.println("------------------------------------------------------------------------------------\n");
                     }
                 }
@@ -95,23 +102,26 @@ public class Main {
                     int replay = scan.nextInt();
 
                     if (replay == 1) {
+                        rounds++;
                         npc.setHealth(70);
                         finished = true;
                         npc = Npc.createRandomNpc();
                         System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
+                        System.out.println("HP: " + npc.getHealth() + "");
                     }
 
                     if (replay == 2) {
                         if (!healthPotion) {
+                            rounds++;
                             healthPotion = true;
                             npc.setHealth(70);
                             player.heal(20);
                             finished = true;
                             npc = Npc.createRandomNpc();
-                            System.out.println("\nA " + npc.getName() + " emerges from the darkness.");
+                            System.out.println("\nA " + npc.getName() + " now emerges from the darkness.");
+                            System.out.println("HP: " + npc.getHealth() + "");
                         } else {
-                            System.out.println("\nYou've already used your health potion.");
-                            System.out.println("Choose another option.");
+                            System.out.println("\nYOU'VE ALREADY USED YOUR POTION. Choose another option.");
                         }
                     }
 

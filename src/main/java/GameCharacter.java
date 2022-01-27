@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 abstract class GameCharacter {
+
+    private ArrayList<Weapon> inventory = new ArrayList<>();
 
     public String playerName;
     double health;
