@@ -1,10 +1,12 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
         Scanner scan = new Scanner(System.in);
+        Random random = new Random();
 
         System.out.println("------------------------------------------------------------------------------------\n");
         System.out.println("Welcome to GenericDungeonGame v3.1! ");
@@ -84,10 +86,10 @@ public class Main {
             if (choice == 1) {
                 System.out.println("\nINVENTORY:");
                 for (int i = 0; i < player.getInventory().size(); i++) {
-                    System.out.printf("%d - %s\n", i, player.getInventory().get(i).getName() + " (" + player.getInventory().get(i).getDamage() + " dmg)");
+                    System.out.printf("%d - %s\n", i+1, player.getInventory().get(i).getName() + " (" + player.getInventory().get(i).getDamage() + " dmg)");
                 }
                 System.out.println("\nWhich weapon would you like to attack with?");
-                currentWeapon = player.getInventory().get(scan.nextInt());
+                currentWeapon = player.getInventory().get(scan.nextInt()-1);
 
                 player.setWeapon(currentWeapon.getName());
                 player.setDamage(currentWeapon.getDamage());
@@ -107,6 +109,8 @@ public class Main {
 
                 while (player.getHealth() > 0 && npc.getHealth() == 0 && !finished) {
                         System.out.println("\nGood job! You've successfully defeated the " + npc.getName() + "! You had " + player.getHealth() + " HP left.");
+                        System.out.println("The " + npc.getName() + " dropped a magical weapon which has been added to your inventory.");
+                        player.addWeapon(Weapon.createRandomDrop());
                         System.out.println("------------------------------------------------------------------------------------\n");
                         System.out.println("What do you want to do now? You have " + player.getHealth() + " HP left.");
                         System.out.println("1: Keep fighting");

@@ -30,4 +30,10 @@ public class Weapon {
     public void setDamage(int newDamage) {
         this.damage = newDamage;
     }
+
+    public static Weapon createRandomDrop() {
+        String[] drops = {"dark wand", "sword of azeret", "dagger of emore", "wand of light", "scepter of pyresia", "cyresian stoneaxe", "bow of the badlands"};
+        Random random = new Random();
+        return new Weapon(drops[random.nextInt(drops.length)], random.nextInt(24)+8);
+    }
 }
