@@ -179,7 +179,6 @@ public class Main {
                     }
 
                 } else if (choice == 2) {
-
                     System.out.println("\nYou've escaped successfully! You might not be so lucky next time around...");
                     System.out.println("------------------------------------------------------------------------------------\n");
                     scan.close();
@@ -198,14 +197,8 @@ public class Main {
             } catch (Exception e) {
                 scan.next();
             }
-
-
         }
-
-
-
     }
-
 }
 
 
