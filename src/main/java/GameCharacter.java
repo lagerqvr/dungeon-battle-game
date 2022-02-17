@@ -16,8 +16,6 @@ abstract class GameCharacter {
     public GameCharacter(String playerName, int health) {
         this.playerName = playerName;
         this.health = health;
-        this.weapon = weapon;
-        this.damage = damage;
 
         addWeapon(new Weapon("stick",3));
         addWeapon(new Weapon("rock", 2));
@@ -54,11 +52,6 @@ abstract class GameCharacter {
 
     public String getName() {
         return (playerName);
-    }
-
-    public String setName(String name) {
-        this.playerName = name;
-        return name;
     }
 
     public double getFinesse() {

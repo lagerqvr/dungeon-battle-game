@@ -12,23 +12,13 @@ public class Weapon {
         this.damage = random.nextInt(damage)+8;
     }
 
-    // Getter
+    // Getters
     public String getName() {
         return name;
     }
 
-    // Getter
     public int getDamage() {
         return damage;
-    }
-
-    // Setter
-    public void setName(String newName) {
-        this.name = newName;
-    }
-
-    public void setDamage(int newDamage) {
-        this.damage = newDamage;
     }
 
     public static Weapon createRandomDrop() {
